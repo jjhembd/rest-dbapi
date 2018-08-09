@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://www.presbyterianlibrary.org/schemas/workSchema.json",
+  "title": "work",
+  "description": "metadata for a literary work",
+  "required": [ "_id", "authors", "title" ],
+  "type": "object",
+  "properties": {
+    "_id": {
+      "description": "Unique identifier, constructed from the title, for use in URLs",
+      "$ref": "schemaDefinitions.json#/definitions/idString"
+    },
+    "authors": {
+      "description": "_id's of authors in the humans collection",
+      "type": "array",
+      "items": { "$ref": "schemaDefinitions.json#/definitions/idString" },
+      "minItems": 1
+    },
+    "title": { "$ref": "schemaDefinitions.json#/definitions/titleString" },
+    "subtitle": { "$ref": "schemaDefinitions.json#/definitions/titleString" },
+    "date": {
+      "description": "Date of first publication",
+      "type": "string"
+    },
+    "books": {
+      "description": "_id's of books containing this work",
+      "type": "array",
+      "items": { "$ref": "schemaDefinitions.json#/definitions/idString" }
+    },
+    "created": {
+      "description": "Date this document was created",
+      "type": "string"
+    },
+    "updated": {
+      "description": "Date this document was last updated",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

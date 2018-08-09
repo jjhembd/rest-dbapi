@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://www.presbyterianlibrary.org/schemas/schemaDefinitions.json",
+  "description": "Definitions of lower-level elements in the schema",
+  "definitions": {
+    "idString": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 72,
+      "pattern": "^[A-Za-z0-9,\\(\\)_-]*$"
+    },
+    "nameString": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 40,
+      "pattern": "^[A-Za-z0-9,.\\(\\)\\s-]*$"
+    },
+    "titleString": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 72,
+      "pattern": "^[A-Za-z0-9,.\\(\\)\\s-]*$"
+    }
+  }
+}
