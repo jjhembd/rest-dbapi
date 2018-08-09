@@ -1,0 +1,29 @@
+{
+  "name": "rest-dbapi",
+  "version": "0.1.0",
+  "description": "Basic Rest API to perform CRUD operations on a Mongo DB through HTTP",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjhembd/rest-dbapi.git"
+  },
+  "keywords": [
+    "REST",
+    "CRUD",
+    "mongo"
+  ],
+  "author": "Presbyterian Librarian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjhembd/rest-dbapi/issues"
+  },
+  "homepage": "https://github.com/jjhembd/rest-dbapi#readme",
+  "dependencies": {
+    "ajv": "^6.5.2",
+    "etag": "^1.8.1",
+    "mongodb": "^3.1.1"
+  }
+}

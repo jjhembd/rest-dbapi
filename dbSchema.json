@@ -1,0 +1,45 @@
+{
+  "url": "mongodb://localhost:27017/",
+  "schemaDependencies": [ "./schemaDefinitions.json" ],
+  "databases": [
+    { "name": "plib",
+      "collections": [
+        { "name": "humans",
+          "schema": "./humanSchema.json",
+          "foreignKeys": [
+            { "field": "works",
+              "refDatabase": "plib",
+              "refCollection": "works"
+            }
+          ]
+        },
+        { "name": "works",
+          "schema": "./workSchema.json",
+          "foreignKeys": [
+            { "field": "authors",
+              "refDatabase": "plib",
+              "refCollection": "humans"
+            },
+            { "field": "books",
+              "refDatabase": "plib",
+              "refCollection": "books"
+            }
+          ]
+        },
+        { "name": "books",
+          "schema": "./bookSchema.json",
+          "foreignKeys": [
+            { "field": "authors",
+              "refDatabase": "plib",
+              "refCollection": "humans"
+            },
+            { "field": "works",
+              "refDatabase": "plib",
+              "refCollection": "works"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

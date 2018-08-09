@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://www.presbyterianlibrary.org/schemas/bookSchema.json",
+  "title": "book",
+  "description": "metadata for a published book",
+  "required": [ "_id", "authors", "works", "title", "date" ],
+  "type": "object",
+  "properties": {
+    "_id": {
+      "description": "Unique identifier, constructed from title and date",
+      "$ref": "schemaDefinitions.json#/definitions/idString"
+    },
+    "authors": {
+      "description": "_id's of authors in the humans collection",
+      "type": "array",
+      "items": { "$ref": "schemaDefinitions.json#/definitions/idString" },
+      "minItems": 1
+    },
+    "works": {
+      "description": "_id's of works in the works collection",
+      "type": "array",
+      "items": { "$ref": "schemaDefinitions.json#/definitions/idString" },
+      "minItems": 1
+    },
+    "title": { "$ref": "schemaDefinitions.json#/definitions/titleString" },
+    "subtitle": { "$ref": "schemaDefinitions.json#/definitions/titleString" },
+    "date": {
+      "description": "Date of publication",
+      "type": "string"
+    },
+    "created": {
+      "description": "Date this document was created",
+      "type": "string"
+    },
+    "updated": {
+      "description": "Date this document was last updated",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
