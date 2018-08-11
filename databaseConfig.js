@@ -36,6 +36,10 @@ var fKeys = {};
 for (let database of dbSchema.databases) {
   fKeys[database.name] = {};
   for (let collection of database.collections) {
+    // NOTE: fKeys MUST be defined as an array, even if we don't have anything
+    // to put in it. We will later do fKeys[database][collection].filter(...)
+    // which behaves nicely with an empty array, but throws a TypeError if
+    // it is not defined.
     fKeys[database.name][collection.name] = [];
     for (let fKey of collection.foreignKeys) {
       // Each fKey describes an array of _id's referencing documents in the 
