@@ -28,7 +28,9 @@ function parseJSON(string) {
 }
 
 // Accumulate and parse the body of a supplied request
-function getRequestBodyJSON(req, id, validator, callBack) {
+// oldDoc is simply passed through, for UPDATE requests via HTTP PUT.
+// (oldDoc may be null if the request is creating a new resource via POST.)
+function getRequestBodyJSON(req, id, validator, oldDoc, callBack) {
   let body = '';
   let err = {};
   req.on('error', passErr);
@@ -53,13 +55,13 @@ function getRequestBodyJSON(req, id, validator, callBack) {
   // NOTE that we ASSUME req will emit an 'end' after req.connection.destroy()
   req.on('end', sendBody);
   function sendBody() {
-    if (err.code) return callBack(err, null);
+    if (err.code) return callBack(err, null, null);
     var parsedBody, JSONerr;
     [parsedBody, JSONerr] = parseJSON(body);
     if (JSONerr) {
       err.code = 400;
       err.message = JSONerr + '\n' + parsedBody;
-      return callBack(err, null);
+      return callBack(err, null, null);
     }
     // Validate against schema for this collection
     var valid = validator(parsedBody);
@@ -67,16 +69,16 @@ function getRequestBodyJSON(req, id, validator, callBack) {
       err.code = 400;
       err.message = 'document does not fit the schema' + '\n' +
           JSON.stringify(validator.errors, null, 2);
-      return callBack(err, null);
+      return callBack(err, null, null);
     }
     // Confirm _id in request body matches the one supplied in the URL
     if (parsedBody._id !== id) {
       err.code = 400;
       err.message = '_id in request body does not match URL' + '\n' +
         'URL: ' + id + '  request body: ' + parsedBody._id;
-      return callBack(err, null);
+      return callBack(err, null, null);
     }
-    callBack(null, parsedBody);
+    callBack(null, oldDoc, parsedBody);
   }
 }
 

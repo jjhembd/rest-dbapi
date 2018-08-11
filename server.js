@@ -87,11 +87,14 @@ function requestListener(request, response) {
       return handlePost(request, response, dbCollection, validator, id, locURL,
           fKeys[database][collection]);
     case 'PUT':
-      return handlePut(request, response, dbCollection, validator, id, locURL);
+      return handlePut(request, response, dbCollection, validator, id, locURL,
+          fKeys[database][collection]);
     case 'PATCH':
-      return handlePatch(request, response, dbCollection, id, locURL);
+      return handlePatch(request, response, dbCollection, validator, id, locURL,
+          fKeys[database][collection]);
     case 'DELETE':
-      return handleDelete(request, response, dbCollection, id);
+      return handleDelete(request, response, dbCollection, id,
+          fKeys[database][collection]);
     default:
       return util.httpErr(response, 400,
           'Unknown request method ' + request.method,
@@ -99,6 +102,7 @@ function requestListener(request, response) {
   }
 }
 
-function handlePatch(request, response, dbCollection, id, locationURL) {
+function handlePatch(request, response, dbCollection, id, validator,
+    locationURL, fKeys) {
   return util.httpErr(response, 501, 'PATCH requests not implemented yet');
 }
